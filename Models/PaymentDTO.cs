@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AltPaymentApi.Models
 {
-    public class Payment
+    public class PaymentDTO
     {
         public int ID { get; set; }
         public int DboID { get; set; }
@@ -22,7 +22,6 @@ namespace AltPaymentApi.Models
 
         [Required]
         public decimal Amount { get; set; }
-
 
         public string PaymentDetails { get; set; }
     }
