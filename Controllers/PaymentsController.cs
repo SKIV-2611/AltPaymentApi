@@ -79,7 +79,7 @@ namespace AltPaymentApi.Controllers
         {
             if (PaymentExistsByDboID(PaymentDTO.DboID))
             {
-                return new OkObjectResult(PaymentDTO);
+                return Ok();
             }
             var payment = new Payment
             {
@@ -94,10 +94,7 @@ namespace AltPaymentApi.Controllers
             _context.Payment.Add(payment);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(
-                nameof(GetPayment),
-                new { ID = payment.ID },
-                ItemToDTO(payment));
+            return Ok();
         }
 
         [HttpDelete("{id}")]
