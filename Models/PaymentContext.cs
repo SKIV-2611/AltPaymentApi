@@ -12,6 +12,8 @@ namespace AltPaymentApi.Models
         {
         }
 
-        public DbSet<Payment> Payment { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+        public DbSet<Statement> Statements { get; set; }
+        public DbSet<Account> Accounts { get; set; }
     }
 }

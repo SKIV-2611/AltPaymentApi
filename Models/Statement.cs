@@ -9,6 +9,7 @@ namespace AltPaymentApi.Models
 {
     public class Statement
     {
+        public int ID { get; set; }
         [StringLength(20, MinimumLength = 20)]
         [Required]
         public string DebitAccountNumber { get; set; }
