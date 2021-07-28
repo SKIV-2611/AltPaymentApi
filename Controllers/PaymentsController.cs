@@ -24,7 +24,7 @@ namespace AltPaymentApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PaymentDTO>>> GetPayments()
         {
-            return await _context.Payment
+            return await _context.Payments
                 .Select(x => ItemToDTO(x))
                 .ToListAsync();
         }
@@ -32,7 +32,7 @@ namespace AltPaymentApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<PaymentDTO>> GetPayment(long id)
         {
-            var Payment = await _context.Payment.FindAsync(id);
+            var Payment = await _context.Payments.FindAsync(id);
 
             if (Payment == null)
             {
@@ -50,7 +50,7 @@ namespace AltPaymentApi.Controllers
                 return BadRequest();
             }
 
-            var Payment = await _context.Payment.FindAsync(id);
+            var Payment = await _context.Payments.FindAsync(id);
             if (Payment == null)
             {
                 return NotFound();
@@ -91,7 +91,7 @@ namespace AltPaymentApi.Controllers
 
             };
 
-            _context.Payment.Add(payment);
+            _context.Payments.Add(payment);
             await _context.SaveChangesAsync();
 
             return Ok();
@@ -100,24 +100,24 @@ namespace AltPaymentApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePayment(long id)
         {
-            var Payment = await _context.Payment.FindAsync(id);
+            var Payment = await _context.Payments.FindAsync(id);
 
             if (Payment == null)
             {
                 return NotFound();
             }
 
-            _context.Payment.Remove(Payment);
+            _context.Payments.Remove(Payment);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
         private bool PaymentExists(long id) =>
-             _context.Payment.Any(e => e.ID == id);
+             _context.Payments.Any(e => e.ID == id);
 
         private bool PaymentExistsByDboID(long DboID) =>
-            _context.Payment.Any(e => e.DboID == DboID);
+            _context.Payments.Any(e => e.DboID == DboID);
 
         private static PaymentDTO ItemToDTO(Payment Payment) =>
             new PaymentDTO
