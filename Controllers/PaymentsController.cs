@@ -19,7 +19,12 @@ namespace AltPaymentApi.Controllers
         {
             _context = context;
         }
-
+        // GET: api/Payments
+        //[HttpGet]
+        public async Task<ActionResult<IEnumerable<Payment>>> GetPayment()
+        {
+            return await _context.Payments.ToListAsync();
+        }
         [HttpPost]
         public async Task<ActionResult<PaymentDTO>> CreatePayment(PaymentDTO PaymentDTO)
         {
@@ -41,15 +46,11 @@ namespace AltPaymentApi.Controllers
             {
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException dbUpRace)
             {
-                if (!PaymentExistsByDboID(payment.DboID))
-                {
-                    await _context.SaveChangesAsync();
-                }
-                else throw;
+                //if(dbUpRace.Message)
             }
-            
+            //await _context.SaveChangesAsync();
             return Ok();
         }
 
