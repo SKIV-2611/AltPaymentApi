@@ -31,7 +31,7 @@ namespace AltPaymentApi
         {
             services.AddDbContext<PaymentContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("PaymentContext")));
-            services.AddControllers();
+            //services.AddControllers();
             //services.AddSwaggerGen(c =>
             //{
             //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "AltPaymentApi", Version = "v1" });
