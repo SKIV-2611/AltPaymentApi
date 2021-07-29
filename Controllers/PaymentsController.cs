@@ -36,17 +36,20 @@ namespace AltPaymentApi.Controllers
                 PaymentDetails = PaymentDTO.PaymentDetails
 
             };
+            _context.Payments.Add(payment);
             try
             {
-
+                await _context.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException dbUCE)
+            catch (DbUpdateConcurrencyException)
             {
-
+                if (!PaymentExistsByDboID(payment.DboID))
+                {
+                    await _context.SaveChangesAsync();
+                }
+                else throw;
             }
-            _context.Payments.Add(payment);
-            await _context.SaveChangesAsync();
-
+            
             return Ok();
         }
 
