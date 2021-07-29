@@ -1,5 +1,4 @@
-﻿USE mvc_db;   
-GO  
+﻿GO  
 ALTER TABLE dbo.Payments
 ADD CONSTRAINT DboID UNIQUE (DboID);   
 GO  
