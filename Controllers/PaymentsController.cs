@@ -49,11 +49,7 @@ namespace AltPaymentApi.Controllers
             }
             catch (DbUpdateConcurrencyException dbUpRace)
             {
-                if(dbUpRace.Entries.Count >= 1)
-                {
-                    return Ok();
-                }
-                throw;
+                dbUpRace.Entries.SingleOrDefault();
             }
             //await _context.SaveChangesAsync();
             return Ok();
