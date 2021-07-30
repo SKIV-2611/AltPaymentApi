@@ -49,7 +49,8 @@ namespace AltPaymentApi.Controllers
             }
             catch (DbUpdateConcurrencyException dbUpRace)
             {
-                //dbUpRace.InnerException.HResult == 
+                if ((long)dbUpRace.InnerException.HResult != 0x8004E02B)
+                    throw;
             }
             //await _context.SaveChangesAsync();
             return Ok();
