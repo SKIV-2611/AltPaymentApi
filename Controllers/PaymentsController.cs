@@ -23,8 +23,7 @@ namespace AltPaymentApi.Controllers
         //[HttpGet]
         public async Task<ActionResult<IEnumerable<Payment>>> GetPayment()
         {
-            //return await _context.Payments.ToListAsync();
-            return Ok();
+            return await _context.Payments.ToListAsync();
         }
         [HttpPost]
         public async Task<ActionResult<PaymentDTO>> CreatePayment(PaymentDTO PaymentDTO)
