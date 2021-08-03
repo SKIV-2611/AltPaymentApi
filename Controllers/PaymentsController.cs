@@ -47,11 +47,10 @@ namespace AltPaymentApi.Controllers
             {
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException dbUpRace)
-                when ((long)dbUpRace.HResult == 0x80131904)
+            catch (DbUpdateException dbUpRace)
+                when ((long)dbUpRace.HResult != 0xF3351CAC)
             {
             }
-            //await _context.SaveChangesAsync();
             return Ok();
         }
 
