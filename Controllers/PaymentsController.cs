@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.SqlClient;
 using AltPaymentApi.Models;
 
 namespace AltPaymentApi.Controllers
@@ -19,13 +20,6 @@ namespace AltPaymentApi.Controllers
         {
             _context = context;
         }
-        // GET: api/Payments
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<Payment>>> GetPayment()
-        //{
-            //return await _context.Payments.ToListAsync();
-        //    return Ok();
-        //}
         [HttpPost]
         public async Task<ActionResult<PaymentDTO>> CreatePayment(PaymentDTO PaymentDTO)
         {
@@ -48,8 +42,12 @@ namespace AltPaymentApi.Controllers
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException dbUpRace)
-                when ((long)dbUpRace.HResult != 0xF3351CAC)
+                //when (dbUpRace.InnerException.HResult != -2146232060 || (((SqlException)dbUpRace.InnerException).Number != 2627))
             {
+                if (dbUpRace.InnerException.HResult != -2146232060 ||
+                    (((SqlException)dbUpRace.InnerException).Number != 2627) ||
+                    !((SqlException)dbUpRace.InnerException).Message.Contains("DboID"))
+                    throw;
             }
             return Ok();
         }
