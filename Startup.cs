@@ -23,10 +23,6 @@ namespace AltPaymentApi
             services.AddDbContext<PaymentContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("PaymentContext")));
             services.AddControllers();
-            //services.AddSwaggerGen(c =>
-            //{
-            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "AltPaymentApi", Version = "v1" });
-            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,8 +31,6 @@ namespace AltPaymentApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                //app.UseSwagger();
-                //app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AltPaymentApi v1"));
             }
 
             app.UseHttpsRedirection();
