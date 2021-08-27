@@ -7,10 +7,12 @@ using AltPaymentApi.Models;
 
 namespace AltPaymentApi.Interfaces
 {
+    [SerializationMethods(Query = QuerySerializationMethod.Serialized,
+        Body = BodySerializationMethod.Serialized)]
     public interface IChangePaymentStatus
     {
-        [Post("api/PlugPaymentOrders")]
+        [Post("api/PlugPaymentOrders/{id}")]
         public Task ChangePaymentStatus
-            ([Body] int id, [Body] string status, [Body] string comments);
+            ([Path("id")] int id, [Body] string status);
     }
 }
