@@ -50,7 +50,7 @@ namespace AltPaymentApi.Controllers
                     !((SqlException)dbUpRace.InnerException).Message.Contains("DboID"))
                     throw;
             }
-            string status = "2";
+            string status = "2";//тестовое значение
             await _changePaymentStatus.ChangePaymentStatus(payment.DboID, status);
             return Ok();
         }
