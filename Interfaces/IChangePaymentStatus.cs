@@ -11,7 +11,7 @@ namespace AltPaymentApi.Interfaces
         Body = BodySerializationMethod.Serialized)]
     public interface IChangePaymentStatus
     {
-        [Post("api/PlugPaymentOrders/{id}")]
+        [Post("api/PaymentOrders/{id}")]
         public Task ChangePaymentStatus
             ([Path("id")] int id, [Body] string status);
     }
