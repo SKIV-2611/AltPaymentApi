@@ -15,12 +15,11 @@ namespace AltPaymentApi.Controllers
     {
         private readonly PaymentContext _context;
         private readonly IChangePaymentStatus _changePaymentStatus;
-        private static readonly string[] statuses = {"Accepted", "Refused"};
         public PaymentsController(PaymentContext context)
         {
             _context = context;
             _changePaymentStatus =
-                RestClient.For<IChangePaymentStatus>("http://localhost:64633");
+                RestClient.For<IChangePaymentStatus>("http://localhost:4689");
         }
         [HttpPost]
         public async Task<ActionResult<PaymentDTO>> CreatePayment(PaymentDTO PaymentDTO)
@@ -51,7 +50,8 @@ namespace AltPaymentApi.Controllers
                     !((SqlException)dbUpRace.InnerException).Message.Contains("DboID"))
                     throw;
             }
-            await _changePaymentStatus.ChangePaymentStatus(payment.DboID, statuses[0], string.Empty);
+            string status = "2";
+            await _changePaymentStatus.ChangePaymentStatus(payment.DboID, status);
             return Ok();
         }
 
